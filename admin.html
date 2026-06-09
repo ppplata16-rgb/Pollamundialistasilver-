@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Polla Mundialista - Silver Solutions</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body data-app-view="admin">
+  <div class="app-shell">
+    <header class="album-hero dashboard-hero" aria-label="Polla Mundialista 2026">
+      <div class="album-cover album-cover-small" aria-hidden="true">
+        <span class="album-ribbon">FIFA 2026</span>
+        <span class="album-year">26</span>
+        <span class="album-trophy"></span>
+        <strong>World Cup<br>2026</strong>
+        <span class="album-tag">Polla Mundialista</span>
+      </div>
+      <div class="hero-copy">
+        <p class="hero-kicker">Panel mundialista</p>
+        <h1>Control del torneo</h1>
+        <p>Administra participantes, reglas, resultados y ranking con una identidad inspirada en el Mundial 2026.</p>
+      </div>
+    </header>
+
+    <section id="adminAuthGate" class="panel auth-gate">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-kicker">Admin Login</p>
+          <h2>Entrar al panel</h2>
+        </div>
+      </div>
+
+      <form id="adminAccessForm" class="stack-form auth-form">
+        <div>
+          <label for="adminPinInput">Clave admin</label>
+          <input type="password" id="adminPinInput" placeholder="Crea o escribe la clave admin" autocomplete="current-password" minlength="4" required>
+        </div>
+        <button id="adminAccessButton" type="submit">Entrar</button>
+        <p id="adminStatus" class="mini-status" aria-live="polite">Ingresa la clave admin para acceder al panel.</p>
+      </form>
+    </section>
+
+    <div id="adminWorkspace" class="workspace-shell is-hidden">
+      <div class="session-strip">
+        <div>
+          <span class="session-label">Sesi&oacute;n activa</span>
+          <strong id="adminIdentity">Administrador autenticado</strong>
+        </div>
+        <div class="session-actions">
+          <button id="saveAllDataButton" class="secondary-button" type="button">Guardar todos los datos</button>
+          <button id="resetAdminPinButton" class="secondary-button" type="button">Resetear PIN</button>
+          <button id="adminLogoutButton" class="secondary-button" type="button">Cerrar sesi&oacute;n</button>
+        </div>
+      </div>
+
+      <section class="summary-grid" aria-label="Resumen rapido">
+        <article class="summary-card">
+          <span class="summary-label">Participantes</span>
+          <strong id="participantsCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Partidos</span>
+          <strong id="matchesCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Pron&oacute;sticos cargados</span>
+          <strong id="predictionsCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Resultados oficiales</span>
+          <strong id="resultsCount">0</strong>
+        </article>
+      </section>
+
+      <p id="appNotice" class="notice notice-neutral" aria-live="polite">Vista reservada para administraci&oacute;n interna.</p>
+
+      <main class="main-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Reglas</p>
+              <h2>Puntaje</h2>
+            </div>
+          </div>
+
+          <form id="scoringForm" class="grid-form">
+            <div>
+              <label for="exactPointsInput">Puntos por exacto</label>
+              <input type="number" id="exactPointsInput" min="0" step="1">
+            </div>
+            <div>
+              <label for="outcomePointsInput">Puntos por signo</label>
+              <input type="number" id="outcomePointsInput" min="0" step="1">
+            </div>
+            <button type="submit">Guardar reglas</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Fuente oficial</p>
+              <h2>Sincronizaci&oacute;n FIFA</h2>
+            </div>
+          </div>
+
+          <div class="sync-box">
+            <div>
+              <p class="panel-note">Actualiza fixture, grupos y resultados del Mundial 2026 desde el feed oficial de FIFA.</p>
+            </div>
+            <div class="sync-actions">
+              <button id="syncFifaButton" type="button">Sincronizar FIFA 2026</button>
+              <p id="syncStatus" class="mini-status">Sin sincronizar todav&iacute;a.</p>
+            </div>
+          </div>
+
+          <button id="backupButton" class="secondary-button top-gap" type="button">Descargar respaldo JSON</button>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Bonus jugador</p>
+              <h2>Goleadores oficiales</h2>
+            </div>
+          </div>
+
+          <form id="goalScorersForm" class="stack-form">
+            <div>
+              <label for="goalScorersInput">Goleadores extra o respaldo manual</label>
+              <textarea id="goalScorersInput" rows="7" placeholder="Escribe un jugador por linea&#10;Ej. Enner Valencia&#10;Kylian Mbappe"></textarea>
+            </div>
+            <button id="goalScorersButton" type="submit">Guardar lista manual</button>
+            <p id="goalScorersStatus" class="mini-status" aria-live="polite">Carga aqu&iacute; goleadores confirmados para activar el bonus de 3 puntos.</p>
+          </form>
+
+          <form id="matchGoalScorersForm" class="stack-form top-gap">
+            <div>
+              <label for="goalScorersMatchSelect">Partido con resultado oficial</label>
+              <select id="goalScorersMatchSelect"></select>
+            </div>
+            <div>
+              <label for="matchGoalScorersInput">Jugadores que anotaron en ese partido</label>
+              <textarea id="matchGoalScorersInput" rows="6" placeholder="Escribe un jugador por linea&#10;o separado por comas"></textarea>
+            </div>
+            <button id="matchGoalScorersButton" type="submit">Guardar goleadores del partido</button>
+            <p id="matchGoalScorersStatus" class="mini-status" aria-live="polite">Cuando haya resultados oficiales podr&aacute;s registrar goleadores por partido.</p>
+          </form>
+
+          <p class="panel-note">El feed de calendario de FIFA no expone nombres de goleadores, as&iacute; que aqu&iacute; puedes llevar un respaldo manual general y tambi&eacute;n detallarlo por partido. El bonus usa la uni&oacute;n de ambos listados y cada gol vale 3 puntos.</p>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Usuarios</p>
+              <h2>Participantes</h2>
+            </div>
+          </div>
+
+          <form id="participantForm" class="grid-form">
+            <div>
+              <label for="participantNameInput">Nombre</label>
+              <input type="text" id="participantNameInput" placeholder="Ej. Ana" required>
+            </div>
+            <div>
+              <label for="participantPinCreateInput">PIN del participante</label>
+              <input type="password" id="participantPinCreateInput" placeholder="M&iacute;nimo 4 caracteres" autocomplete="new-password" minlength="4" required>
+            </div>
+            <button type="submit">Agregar participante</button>
+          </form>
+
+          <div class="table-scroll compact-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Participante</th>
+                  <th>Pron&oacute;sticos</th>
+                  <th>Estado</th>
+                  <th>Acci&oacute;n</th>
+                </tr>
+              </thead>
+              <tbody id="participantsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Resumen administrativo</p>
+              <h2>Picks de participantes</h2>
+            </div>
+          </div>
+
+          <p class="panel-note">Vista solo de consulta para el admin. Cada participante elige campe&oacute;n, jugador, equipo y clasificados desde index.html.</p>
+
+          <div class="table-scroll compact-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Participante</th>
+                  <th>Campe&oacute;n</th>
+                  <th>Bonus campe&oacute;n</th>
+                  <th>Jugador elegido</th>
+                  <th>Bonus jugador</th>
+                  <th>Equipo</th>
+                  <th>Bonus equipo</th>
+                  <th>Clasificados</th>
+                </tr>
+              </thead>
+              <tbody id="specialPredictionsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Pron&oacute;sticos</p>
+              <h2>Marcadores guardados</h2>
+            </div>
+          </div>
+
+          <form class="inline-form prediction-review-form">
+            <label for="predictionReviewParticipantSelect">Participante</label>
+            <select id="predictionReviewParticipantSelect"></select>
+            <p id="predictionReviewStatus" class="mini-status" aria-live="polite">Selecciona un participante para ver sus marcadores guardados.</p>
+          </form>
+
+          <div class="table-scroll compact-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Partido</th>
+                  <th>Fecha</th>
+                  <th>Pron&oacute;stico</th>
+                  <th>Resultado</th>
+                  <th>Puntos</th>
+                </tr>
+              </thead>
+              <tbody id="predictionReviewTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Polla general</p>
+              <h2>Pron&oacute;sticos por partido</h2>
+            </div>
+          </div>
+
+          <form class="inline-form prediction-review-form">
+            <label for="generalPoolMatchSelect">Partido</label>
+            <select id="generalPoolMatchSelect"></select>
+            <p id="generalPoolStatus" class="mini-status" aria-live="polite">Selecciona un partido para ver todos los pron&oacute;sticos.</p>
+          </form>
+
+          <div class="table-scroll compact-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Participante</th>
+                  <th>Pron&oacute;stico</th>
+                  <th>Resultado</th>
+                  <th>Puntos</th>
+                </tr>
+              </thead>
+              <tbody id="generalPoolTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Grupos</p>
+              <h2>Fase de grupos A-L</h2>
+            </div>
+          </div>
+
+          <p class="panel-note">Resumen oficial de grupos para revisar r&aacute;pidamente la fase inicial del Mundial.</p>
+          <div id="groupsGrid" class="groups-grid"></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-heading panel-heading-wrap">
+            <div>
+              <p class="panel-kicker">Ranking</p>
+              <h2>Tabla general</h2>
+            </div>
+            <button id="leaderboardExportButton" class="secondary-button panel-action-button" type="button">Descargar Excel</button>
+          </div>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Participante</th>
+                  <th>Jugador elegido</th>
+                  <th>Exactos</th>
+                  <th>Signos</th>
+                  <th>Bonus campe&oacute;n</th>
+                  <th>Bonus jugador</th>
+                  <th>Bonus equipo</th>
+                  <th>Puntos</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="app-core.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

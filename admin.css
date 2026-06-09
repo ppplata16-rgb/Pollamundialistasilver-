@@ -1,0 +1,62 @@
+body[data-app-view="admin"] {
+    --bg-top: #f6ff00;
+    --bg-bottom: #ff3200;
+    --accent: #f8d84e;
+    --accent-strong: #ff2b00;
+}
+
+@keyframes admin-rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.page-admin-ready .auth-gate,
+body.page-admin-ready .workspace-shell,
+body.page-admin-ready #appNotice {
+    animation: admin-rise 0.42s ease both;
+}
+
+body[data-app-view="admin"] .auth-gate {
+    margin-bottom: 20px;
+}
+
+body[data-app-view="admin"] .auth-gate,
+body[data-app-view="admin"] .panel:first-of-type {
+    border-color: rgba(4, 22, 55, 0.24);
+}
+
+body[data-app-view="admin"] .sync-box {
+    min-height: 168px;
+}
+
+body[data-app-view="admin"] .compact-table {
+    overflow-x: auto;
+}
+
+body[data-app-view="admin"] .compact-table table {
+    min-width: 0;
+    width: 100%;
+}
+
+body[data-app-view="admin"] .prediction-review-form {
+    grid-template-columns: minmax(120px, auto) minmax(220px, 340px) minmax(0, 1fr);
+    margin-bottom: 14px;
+}
+
+body[data-app-view="admin"] .prediction-review-form label {
+    align-self: center;
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    body[data-app-view="admin"] .prediction-review-form {
+        grid-template-columns: 1fr;
+    }
+}

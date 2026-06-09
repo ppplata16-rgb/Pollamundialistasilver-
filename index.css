@@ -1,0 +1,102 @@
+body[data-app-view="participant"] {
+    --bg-top: #f6ff00;
+    --bg-bottom: #ff3200;
+    --accent: #f8d84e;
+    --accent-strong: #ff2b00;
+}
+
+@keyframes participant-rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.page-participant-ready .summary-card,
+body.page-participant-ready .panel,
+body.page-participant-ready .album-hero,
+body.page-participant-ready .session-strip {
+    animation: participant-rise 0.42s ease both;
+}
+
+body[data-app-view="participant"] .summary-grid {
+    margin-top: 4px;
+}
+
+body[data-app-view="participant"] .main-grid > .panel:first-child {
+    grid-column: 1 / -1;
+}
+
+body[data-app-view="participant"] #specialPredictionsForm {
+    max-width: none;
+}
+
+body[data-app-view="participant"] .panel:has(#specialPredictionsForm) {
+    grid-column: 1 / -1;
+}
+
+body[data-app-view="participant"] .dashboard-hero {
+    min-height: 300px;
+    padding-block: clamp(28px, 4vw, 48px);
+}
+
+body[data-app-view="participant"] .hero-copy {
+    max-width: 700px;
+}
+
+body[data-app-view="participant"] .hero-copy h1 {
+    max-width: 12ch;
+    font-size: clamp(2.6rem, 5.4vw, 5.4rem);
+}
+
+body[data-app-view="participant"] .hero-copy p:last-child {
+    max-width: 48ch;
+}
+
+body[data-app-view="participant"] .summary-card {
+    background:
+        linear-gradient(90deg, rgba(230, 0, 18, 0.14) 0 7px, transparent 7px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 251, 238, 0.94) 100%);
+}
+
+body[data-app-view="participant"] .session-strip {
+    border-color: rgba(4, 22, 55, 0.18);
+}
+
+body[data-app-view="participant"] .panel-wide:first-of-type .panel-note {
+    max-width: 72ch;
+}
+
+@media (max-width: 640px) {
+    body[data-app-view="participant"] .dashboard-hero {
+        min-height: 220px;
+        padding: 22px 16px;
+    }
+
+    body[data-app-view="participant"] .hero-copy h1 {
+        max-width: 11ch;
+        font-size: clamp(1.85rem, 10vw, 2.8rem);
+    }
+
+    body[data-app-view="participant"] .hero-copy p:last-child {
+        max-width: 32ch;
+    }
+
+    body[data-app-view="participant"] .session-strip {
+        padding: 12px;
+    }
+
+    body[data-app-view="participant"] .session-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    body[data-app-view="participant"] .summary-card strong {
+        font-size: 1.35rem;
+    }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Polla Mundialista - Silver Solutions</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="login.css">
+</head>
+<body data-app-view="login">
+  <div class="app-shell">
+    <header class="album-hero" aria-label="Polla Mundialista 2026">
+      <div class="album-cover" aria-hidden="true">
+        <span class="album-ribbon">FIFA 2026</span>
+        <span class="album-year">26</span>
+        <span class="album-trophy"></span>
+        <strong>World Cup<br>2026</strong>
+        <span class="album-tag">Polla Mundialista</span>
+      </div>
+      <div class="hero-copy">
+        <p class="hero-kicker">Polla Mundialista</p>
+        <h1>Llena tu polla mundialista de pron&oacute;sticos</h1>
+        <p>Entra con tu PIN, juega cada marcador y sigue tu ranking con toda la emoci&oacute;n del torneo.</p>
+      </div>
+    </header>
+
+    <p id="appNotice" class="notice notice-neutral" aria-live="polite">Selecciona tu usuario y escribe tu PIN.</p>
+
+    <main class="login-layout">
+      <section id="participantAuthGate" class="panel auth-gate login-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">Login</p>
+            <h2>Entrar como participante</h2>
+          </div>
+        </div>
+
+        <form id="participantAccessForm" class="stack-form auth-form">
+          <div>
+            <label for="participantLoginSelect">Usuario</label>
+            <select id="participantLoginSelect" required>
+              <option value="">Selecciona tu usuario</option>
+            </select>
+          </div>
+          <div>
+            <label for="participantPinInput">PIN</label>
+            <input type="password" id="participantPinInput" placeholder="Tu PIN personal" autocomplete="current-password" minlength="4" required>
+          </div>
+          <button id="participantUnlockButton" type="submit">Entrar</button>
+          <p id="participantStatus" class="mini-status" aria-live="polite">Selecciona tu usuario y escribe tu PIN para entrar.</p>
+        </form>
+      </section>
+
+      <aside class="panel login-aside">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">Antes de entrar</p>
+            <h2>Qu&eacute; necesitas</h2>
+          </div>
+        </div>
+
+        <p class="panel-note">Cada participante debe existir primero en el panel admin. Cuando te creen, recibir&aacute;s un PIN para ingresar a tu espacio.</p>
+
+        <div class="feature-list">
+          <div class="feature-pill">
+            <strong>Usuario creado</strong>
+            <span>El administrador te registra en el panel interno.</span>
+          </div>
+          <div class="feature-pill">
+            <strong>PIN personal</strong>
+            <span>Tu acceso queda vinculado a un PIN de al menos 4 caracteres.</span>
+          </div>
+          <div class="feature-pill">
+            <strong>Pron&oacute;sticos protegidos</strong>
+            <span>Solo podr&aacute;s editar antes de que el partido quede bloqueado.</span>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="app-core.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

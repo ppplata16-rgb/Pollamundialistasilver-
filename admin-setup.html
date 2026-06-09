@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup Admin | Polla Mundialista</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="login.css">
+</head>
+<body data-app-view="admin-login">
+  <div class="app-shell">
+    <header class="album-hero" aria-label="Setup Admin">
+      <div class="hero-copy">
+        <p class="hero-kicker">Panel Mundialista</p>
+        <h1>Gesti&oacute;n de Acceso Admin</h1>
+        <p>Desde esta p&aacute;gina puedes crear tu clave de administrador o desbloquear el panel si ya tienes una.</p>
+      </div>
+    </header>
+
+    <p id="appNotice" class="notice notice-neutral" aria-live="polite">Verificando estado del servidor...</p>
+
+    <main class="login-layout">
+      <section id="adminAuthGate" class="panel auth-gate login-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">Seguridad</p>
+            <h2>Acceso Administrativo</h2>
+          </div>
+        </div>
+
+        <form id="adminAccessForm" class="stack-form auth-form">
+          <div>
+            <label for="adminPinInput">Clave Admin (PIN)</label>
+            <input type="password" id="adminPinInput" placeholder="Minimo 4 caracteres" autocomplete="current-password" minlength="4" required>
+          </div>
+          <button id="adminAccessButton" type="submit">Procesar Acceso</button>
+          <p id="adminStatus" class="mini-status" aria-live="polite">Si es la primera vez, define tu clave aqu&iacute;.</p>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="app-core.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      window.initPollaPage({
+        readyClass: "page-admin-setup-ready",
+        focusSelector: "#adminPinInput"
+      });
+    });
+  </script>
+</body>
+</html>
