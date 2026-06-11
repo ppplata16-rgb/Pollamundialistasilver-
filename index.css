@@ -1,0 +1,364 @@
+body[data-app-view="participant"] {
+    --bg-top: #f6ff00;
+    --bg-bottom: #ff3200;
+    --accent: #f8d84e;
+    --accent-strong: #ff2b00;
+}
+
+@keyframes participant-rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.page-participant-ready .summary-card,
+body.page-participant-ready .panel,
+body.page-participant-ready .album-hero,
+body.page-participant-ready .session-strip {
+    animation: participant-rise 0.42s ease both;
+}
+
+body[data-app-view="participant"] .summary-grid {
+    margin-top: 4px;
+}
+
+body[data-app-view="participant"] .app-shell {
+    max-width: 100%;
+    padding-inline: 10px;
+}
+
+body[data-app-view="participant"] .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+body[data-app-view="participant"] .quick-jump-button {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.34);
+    color: #fff;
+}
+
+body[data-app-view="participant"] .quick-jump-button:hover,
+body[data-app-view="participant"] .quick-jump-button:focus-visible {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+body[data-app-view="participant"] .main-grid > .panel:first-child {
+    grid-column: 1 / -1;
+}
+
+body[data-app-view="participant"] #specialPredictionsForm {
+    max-width: none;
+}
+
+body[data-app-view="participant"] .panel:has(#specialPredictionsForm) {
+    grid-column: 1 / -1;
+}
+
+body[data-app-view="participant"] .session-helper-text {
+    margin: 6px 0 0;
+    color: rgba(14, 23, 38, 0.72);
+    font-size: 0.95rem;
+}
+
+body[data-app-view="participant"] .dashboard-hero {
+    min-height: 300px;
+    padding-block: clamp(28px, 4vw, 48px);
+}
+
+body[data-app-view="participant"] .hero-copy {
+    max-width: 700px;
+}
+
+body[data-app-view="participant"] .hero-copy h1 {
+    max-width: 12ch;
+    font-size: clamp(2.6rem, 5.4vw, 5.4rem);
+}
+
+body[data-app-view="participant"] .hero-copy p:last-child {
+    max-width: 48ch;
+}
+
+body[data-app-view="participant"] .summary-card {
+    background:
+        linear-gradient(90deg, rgba(230, 0, 18, 0.14) 0 7px, transparent 7px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 251, 238, 0.94) 100%);
+}
+
+body[data-app-view="participant"] .summary-card-highlight {
+    border-color: rgba(255, 50, 0, 0.24);
+    box-shadow: 0 14px 28px rgba(255, 122, 0, 0.12);
+}
+
+body[data-app-view="participant"] .summary-card-highlight strong {
+    color: #c63000;
+}
+
+body[data-app-view="participant"] .leaderboard-row-active {
+    background: linear-gradient(90deg, rgba(246, 255, 0, 0.18), rgba(255, 122, 0, 0.08));
+}
+
+body[data-app-view="participant"] .leaderboard-row-active td {
+    font-weight: 700;
+}
+
+body[data-app-view="participant"] .session-strip {
+    border-color: rgba(4, 22, 55, 0.18);
+}
+
+body[data-app-view="participant"] .participant-helper-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.9fr);
+    gap: 18px;
+    margin-top: 18px;
+}
+
+body[data-app-view="participant"] .helper-card {
+    border: 1px solid rgba(4, 22, 55, 0.12);
+    border-radius: 24px;
+    padding: 20px 22px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 249, 239, 0.94)),
+        linear-gradient(135deg, rgba(248, 216, 78, 0.12), rgba(255, 50, 0, 0.08));
+    box-shadow: 0 16px 32px rgba(4, 22, 55, 0.08);
+}
+
+body[data-app-view="participant"] .helper-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+body[data-app-view="participant"] .helper-card h2 {
+    margin: 2px 0 0;
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+}
+
+body[data-app-view="participant"] .helper-kicker {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(14, 23, 38, 0.64);
+}
+
+body[data-app-view="participant"] #participantProgressPercent {
+    font-size: 1.45rem;
+    line-height: 1;
+    color: #041637;
+}
+
+body[data-app-view="participant"] .progress-meter {
+    width: 100%;
+    height: 14px;
+    margin-top: 16px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(4, 22, 55, 0.1);
+}
+
+body[data-app-view="participant"] .progress-meter > span {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #ff7a00 0%, #ff3200 45%, #f6ff00 100%);
+    transition: width 0.24s ease;
+}
+
+body[data-app-view="participant"] .helper-copy {
+    margin: 14px 0 0;
+    color: rgba(14, 23, 38, 0.74);
+}
+
+body[data-app-view="participant"] .helper-steps {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    color: rgba(14, 23, 38, 0.82);
+}
+
+body[data-app-view="participant"] .helper-steps li + li {
+    margin-top: 10px;
+}
+
+body[data-app-view="participant"] .panel-wide:first-of-type .panel-note {
+    max-width: 72ch;
+}
+
+body[data-app-view="participant"] .knockout-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    overflow: visible;
+    align-items: start;
+}
+
+body[data-app-view="participant"] .knockout-card {
+    display: grid;
+    grid-template-rows: auto auto !important;
+    gap: 8px;
+    min-width: 0;
+    align-self: start;
+}
+
+body[data-app-view="participant"] .knockout-card-header {
+    padding: 10px 12px;
+}
+
+body[data-app-view="participant"] .knockout-card-header h3 {
+    font-size: 1rem;
+}
+
+body[data-app-view="participant"] .knockout-match-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 420px));
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    justify-content: start;
+    align-items: start;
+    align-content: start;
+    gap: 8px;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+}
+
+body[data-app-view="participant"] .knockout-match,
+body[data-app-view="participant"] .knockout-card-round-of-32 .knockout-match,
+body[data-app-view="participant"] .knockout-card-round-of-16 .knockout-match,
+body[data-app-view="participant"] .knockout-card-quarter-finals .knockout-match,
+body[data-app-view="participant"] .knockout-card-semi-finals .knockout-match,
+body[data-app-view="participant"] .knockout-card-third-place .knockout-match,
+body[data-app-view="participant"] .knockout-card-final .knockout-match {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-row: auto !important;
+    min-height: 0;
+    padding: 10px;
+}
+
+body[data-app-view="participant"] .knockout-card .knockout-match::before,
+body[data-app-view="participant"] .knockout-card .knockout-match::after {
+    display: none;
+}
+
+body[data-app-view="participant"] .knockout-match-main span {
+    display: block;
+}
+
+body[data-app-view="participant"] .knockout-teams {
+    gap: 8px;
+    align-content: start;
+}
+
+body[data-app-view="participant"] .knockout-team-row {
+    grid-template-columns: minmax(0, 1fr) 34px 28px;
+    gap: 6px;
+    min-height: 30px;
+    align-items: center;
+}
+
+body[data-app-view="participant"] .knockout-team-select {
+    min-width: 0;
+    padding: 8px 10px;
+    font-size: 0.82rem;
+}
+
+body[data-app-view="participant"] .knockout-team-name {
+    line-height: 1.2;
+}
+
+body[data-app-view="participant"] .knockout-score-input {
+    width: 100%;
+    min-width: 34px;
+}
+
+body[data-app-view="participant"] .knockout-match-footer {
+    grid-template-columns: minmax(0, 1fr) auto;
+    display: grid;
+    align-items: end;
+    gap: 6px;
+}
+
+body[data-app-view="participant"] .knockout-points {
+    align-self: end;
+}
+
+body[data-app-view="participant"] .knockout-match .save-match-button {
+    width: auto;
+    min-width: 132px;
+    align-self: end;
+}
+
+@media (max-width: 640px) {
+    body[data-app-view="participant"] .dashboard-hero {
+        min-height: 220px;
+        padding: 22px 16px;
+    }
+
+    body[data-app-view="participant"] .hero-copy h1 {
+        max-width: 11ch;
+        font-size: clamp(1.85rem, 10vw, 2.8rem);
+    }
+
+    body[data-app-view="participant"] .hero-copy p:last-child {
+        max-width: 32ch;
+    }
+
+    body[data-app-view="participant"] .session-strip {
+        padding: 12px;
+    }
+
+    body[data-app-view="participant"] .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    body[data-app-view="participant"] .session-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    body[data-app-view="participant"] .participant-helper-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-app-view="participant"] .knockout-match-list {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-app-view="participant"] .knockout-team-row {
+        grid-template-columns: minmax(0, 1fr) 34px 28px;
+    }
+
+    body[data-app-view="participant"] .knockout-match-footer {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-app-view="participant"] .knockout-match .save-match-button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    body[data-app-view="participant"] .helper-card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    body[data-app-view="participant"] .helper-card-head {
+        align-items: center;
+    }
+
+    body[data-app-view="participant"] .summary-card strong {
+        font-size: 1.35rem;
+    }
+}

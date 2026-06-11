@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Participantes | Polla Mundialista - Silver Solutions</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="index.css">
+</head>
+<body data-app-view="participant">
+  <div class="app-shell">
+ 
+    <div id="participantWorkspace" class="workspace-shell is-hidden">
+      <header class="album-hero dashboard-hero" aria-label="Polla Mundialista 2026">
+        <div class="hero-copy">
+          <p class="hero-kicker">Polla Mundialista 2026</p>
+          <h1>Mis pron&oacute;sticos</h1>
+          <p>Elige tus extras, marca cada resultado y guarda todo antes de que empiece el partido.</p>
+          <div class="hero-actions" aria-label="Accesos rapidos">
+            <button class="secondary-button quick-jump-button" type="button" data-scroll-target="extrasSection">Ir a extras</button>
+            <button class="secondary-button quick-jump-button" type="button" data-scroll-target="fixtureSection">Ir al fixture</button>
+            <button class="secondary-button quick-jump-button" type="button" data-scroll-target="knockoutSection">Ir a eliminatorias</button>
+            <button class="secondary-button quick-jump-button" type="button" data-scroll-target="rankingSection">Ver ranking</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="session-strip">
+        <div>
+          <span class="session-label">Sesi&oacute;n activa</span>
+          <strong id="participantIdentity">Participante autenticado</strong>
+          <p id="participantSaveState" class="session-helper-text">Todo listo para empezar.</p>
+        </div>
+        <div class="session-actions">
+          <button id="saveAllDataButton" class="secondary-button" type="button">Guardar cambios</button>
+          <button id="participantLogoutButton" class="secondary-button" type="button">Cerrar sesi&oacute;n</button>
+        </div>
+      </div>
+
+      <section class="summary-grid" aria-label="Resumen rapido">
+        <article class="summary-card summary-card-highlight">
+          <span class="summary-label">Mi puesto</span>
+          <strong id="participantRankValue">-</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Participantes</span>
+          <strong id="participantsCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Partidos</span>
+          <strong id="matchesCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Pron&oacute;sticos cargados</span>
+          <strong id="predictionsCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Resultados oficiales</span>
+          <strong id="resultsCount">0</strong>
+        </article>
+      </section>
+
+      <p id="appNotice" class="notice notice-neutral" aria-live="polite">Todo lo que cambies se guarda para tu usuario. Revisa el aviso de confirmaci&oacute;n.</p>
+
+      <section class="participant-helper-grid" aria-label="Guia rapida del participante">
+        <article class="helper-card helper-card-progress">
+          <div class="helper-card-head">
+            <div>
+              <span class="helper-kicker">Tu avance</span>
+              <h2>Progreso de la polla</h2>
+            </div>
+            <strong id="participantProgressPercent">0%</strong>
+          </div>
+          <div class="progress-meter" aria-hidden="true">
+            <span id="participantProgressBar"></span>
+          </div>
+          <p id="participantProgressText" class="helper-copy">Completa tus extras y luego tus partidos para avanzar.</p>
+        </article>
+
+        <article class="helper-card">
+          <span class="helper-kicker">Como llenarla</span>
+          <h2>Orden recomendado</h2>
+          <ol class="helper-steps">
+            <li>Completa campe&oacute;n, goleador y tu equipo favorito.</li>
+            <li>Marca semifinalistas, finalistas y clasificados por grupo.</li>
+            <li>Llena fase de grupos, eliminatorias y final; luego guarda cuando termines un bloque.</li>
+          </ol>
+        </article>
+      </section>
+
+      <main class="main-grid">
+        <section class="panel" id="fifaStatusSection">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Fuente oficial</p>
+              <h2>Estado de FIFA</h2>
+            </div>
+          </div>
+
+          <p id="syncStatus" class="mini-status">Consultando la API oficial de FIFA...</p>
+          <p class="panel-note">Los partidos y resultados se actualizan desde FIFA. Cuando un partido comienza, ya no se puede editar.</p>
+        </section>
+
+        <section class="panel" id="extrasSection">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Extras</p>
+              <h2>Campe&oacute;n, jugador y equipo</h2>
+            </div>
+          </div>
+
+          <form id="specialPredictionsForm" class="stack-form special-picks-form">
+            <div class="field-with-action">
+              <div class="field-group">
+                <label for="championPickSelect">Campe&oacute;n</label>
+                <select id="championPickSelect"></select>
+              </div>
+            </div>
+            <div class="field-with-action">
+              <div class="field-group">
+                <label for="topScorerPickInput">Jugador elegido</label>
+                <input type="text" id="topScorerPickInput" placeholder="Ej. Kylian Mbappe" autocomplete="off">
+              </div>
+            </div>
+            <div class="field-with-action">
+              <div class="field-group">
+                <label for="favoriteTeamSelect">Tu equipo</label>
+                <select id="favoriteTeamSelect"></select>
+              </div>
+            </div>
+            <div class="advancers-picker">
+              <div class="advancers-heading">
+                <div>
+                  <span class="form-kicker">Rondas finales</span>
+                  <strong>Semifinalistas y finalistas</strong>
+                </div>
+                <span class="badge badge-projected">2 pts c/u</span>
+              </div>
+              <div id="stagePicksGrid" class="advancers-grid"></div>
+            </div>
+            <div class="advancers-picker">
+              <div class="advancers-heading">
+                <div>
+                  <span class="form-kicker">Siguiente ronda</span>
+                  <strong>Clasificados por grupo</strong>
+                </div>
+                <span class="badge badge-projected">1, 2 y 3</span>
+              </div>
+              <div id="groupAdvancersGrid" class="advancers-grid"></div>
+            </div>
+            <button id="specialPredictionsButton" type="submit">Guardar mis extras</button>
+            <p id="specialPredictionsStatus" class="mini-status" aria-live="polite">Cada participante guarda aqu&iacute; sus pron&oacute;sticos extra del torneo.</p>
+          </form>
+
+          <p class="panel-note">Tu equipo suma 3 por victoria y 1 por empate. Tu jugador suma 3 por gol. El campe&oacute;n suma 5.</p>
+        </section>
+
+        <section class="panel panel-wide" id="groupsSection">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Grupos</p>
+              <h2>Fase de grupos A-L</h2>
+            </div>
+          </div>
+
+          <p class="panel-note">Tabla real de grupos seg&uacute;n la data oficial de FIFA. Se actualiza con el mismo feed del fixture.</p>
+          <div id="groupsGrid" class="groups-grid"></div>
+        </section>
+
+        <section class="panel panel-wide" id="fixtureSection">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Fixture</p>
+              <h2>Partidos por grupo</h2>
+            </div>
+          </div>
+
+          <p class="panel-note">Elige una pesta&ntilde;a, escribe los marcadores y guarda. Si aparece Cerrado, ese partido ya no se edita.</p>
+
+          <div id="matchesTabs" class="fixture-tabs" role="tablist" aria-label="Grupos del fixture"></div>
+          <div class="fixture-actions">
+            <button id="savePredictionsButton" class="secondary-button" type="button">Guardar pronósticos</button>
+          </div>
+          <div id="matchesTableBody" class="fixture-panel" aria-live="polite"></div>
+          <div id="matchesTabSummary" class="mini-status fixture-tab-summary"></div>
+          <div class="fixture-tip">
+            <span class="badge badge-open">Tip</span>
+            <p>Los marcadores abiertos se pueden cambiar hasta antes del inicio del partido.</p>
+          </div>
+        </section>
+
+        <section class="panel panel-wide" id="knockoutSection">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Eliminatorias</p>
+              <h2>Pron&oacute;sticos hasta la final</h2>
+            </div>
+          </div>
+
+          <p class="panel-note">Aqu&iacute; cada participante puede llenar desde ahora los cruces proyectados de eliminaci&oacute;n directa hasta la final. Cuando FIFA publique partidos oficiales, esos cruces reemplazar&aacute;n la versi&oacute;n proyectada.</p>
+          <p class="panel-note">Si un cruce todav&iacute;a no tiene equipo definido, puedes elegir qui&eacute;n avanza seg&uacute;n tus picks y luego poner el marcador de ese partido.</p>
+          <div id="knockoutGrid" class="knockout-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="panel panel-wide" id="rankingSection">
+          <div class="panel-heading panel-heading-wrap">
+            <div>
+              <p class="panel-kicker">Ranking</p>
+              <h2>Tabla general</h2>
+            </div>
+            <button id="leaderboardExportButton" class="secondary-button panel-action-button" type="button">Descargar Excel</button>
+          </div>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Participante</th>
+                  <th>Jugador elegido</th>
+                  <th>Exactos</th>
+                  <th>Signos</th>
+                  <th>Bonus campe&oacute;n</th>
+                  <th>Bonus fases</th>
+                  <th>Bonus jugador</th>
+                  <th>Bonus equipo</th>
+                  <th>Puntos</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="app-core.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
